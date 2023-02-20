@@ -10,4 +10,11 @@ person_1_encoding = face_recognition.face_encodings(person_1)[0]
 person_2_encoding = face_recognition.face_encodings(person_2)[0]
 person_3_encoding = face_recognition.face_encodings(person_3)[0]
 
-# Create a
+# Create a list of known face encodings
+known_face_encodings = [
+    person_1_encoding,
+    person_2_encoding,
+    person_3_encoding
+]
+
+
