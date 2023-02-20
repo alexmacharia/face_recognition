@@ -10,7 +10,7 @@ person_1_encoding = face_recognition.face_encodings(person_1)[0]
 person_2_encoding = face_recognition.face_encodings(person_2)[0]
 person_3_encoding = face_recognition.face_encodings(person_3)[0]
 
-# Create a list of known face encodings
+# Create list of known face encodings
 known_face_encodings = [
     person_1_encoding,
     person_2_encoding,
@@ -18,17 +18,17 @@ known_face_encodings = [
 ]
 
 # Load the image we want to check
-unknown_image = face_recognition.load_image_file("unknown_2.jpg")
+unknown_image = face_recognition.load_image_file("unknown_5.jpg")
 
-# Get face encodings for the faces in the image
-unknown_encodings = face_recognition.face_encodings(unknown_image)
+# Get face encodings of any people in the picture
+face_locations = face_recognition.face_locations(unknown_image, number_of_times_to_upsample=2)
+unknown_face_encodings = face_recognition.face_encodings(unknown_image, known_face_locations=face_locations)
 
-# Loop over each face in the image
-for face_encoding in unknown_encodings:
+# Loop over each face detected
+for unknown_face_encoding in unknown_face_encodings:
 
-    # Test if unknown face matches any of the three people
-    results = face_recognition.compare_faces(known_face_encodings,
-                                             face_encoding, tolerance=0.6)
+    results = face_recognition.compare_faces(known_face_encodings, unknown_face_encoding, tolerance=0.6)
+
     name = "Unknown"
 
     if results[0]:
